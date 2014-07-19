@@ -2,8 +2,13 @@
  * mklib_1wire.h
  *
  *  Created on: 27-06-2013
- *      Author: edd
+ *      Author: Michal Kaptur
+ *       Email: kaptur.michal at gmail dot com
+ * 
  */
+#ifndef MKLIB_1WIRE_H
+#define MKLIB_1WIRE_H
+ 
 #include <avr/io.h>
 
 
@@ -41,3 +46,5 @@ int OneW_reset();
 int OneW_send_byte(char byte);
 char OneW_read_byte(void);
 
+
+#endif //MKLIB_1WIRE_H
