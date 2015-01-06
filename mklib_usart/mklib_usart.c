@@ -2,7 +2,9 @@
  * usart.c
  *
  *  Created on: 22-06-2013
- *      Author: edd
+ *      Author: Michal Kaptur
+ *       Email: kaptur.michal at gmail dot com
+ * 
  */
 
 #include "mklib_usart.h"
@@ -11,7 +13,7 @@
 
 static FILE stdio_usart = FDEV_SETUP_STREAM(USART_putchar, NULL, _FDEV_SETUP_WRITE);
 
-int USART_init(unsigned int baudrate, unsigned char  rx_enable, unsigned char tx_enable, unsigned char rx_int_enable, unsigned char tx_int_enable)
+uint8_t USART_init(uint32_t baudrate, uint8_t  rx_enable, uint8_t tx_enable, uint8_t rx_int_enable, uint8_t tx_int_enable)
 {
 	if (tx_enable == 1) UCSRB |= (1<<TXEN);
 		else UCSRB &= ~(1<<TXEN);
@@ -19,7 +21,7 @@ int USART_init(unsigned int baudrate, unsigned char  rx_enable, unsigned char tx
 	if (rx_enable == 1) UCSRB |= (1<<RXEN);
 		else UCSRB &= ~(1<<RXEN);
 
-	int temp = (((F_CPU / (baudrate * 16UL))) - 1);
+	uint32_t temp = (((F_CPU / (baudrate * 16UL))) - 1);
 
 	UBRRL = temp;
 	UBRRH = (temp>>8);
@@ -33,7 +35,7 @@ int USART_init(unsigned int baudrate, unsigned char  rx_enable, unsigned char tx
 	return 0;
 }
 
-int USART_putchar(char c, FILE *stream)
+uint8_t USART_putchar(uint8_t c, FILE *stream)
 {
 	while (!(UCSRA & (1<<UDRE)));
     if (c == '\n') USART_putchar('\r', stream);
@@ -42,15 +44,15 @@ int USART_putchar(char c, FILE *stream)
     return 0;
 }
 
-int USART_stdout_redirect()
+uint8_t USART_stdout_redirect()
 {
 	stdout = &stdio_usart;
 	return 0;
 }
 
-char USART_getchar()
+uint8_t USART_getchar()
 {
-	char temp;
+	uint8_t temp;
 	UCSRB &= ~(1<<RXCIE);
 	while (!(UCSRA & (1<<RXC)));
 	UCSRB |= (1<<RXCIE);

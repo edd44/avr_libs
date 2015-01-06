@@ -15,11 +15,10 @@
 #include <stdio.h>
 
 
-
-int USART_init(unsigned int baudrate, unsigned char  rx_enable, unsigned char tx_enable, unsigned char rx_int_enable, unsigned char tx_int_enable);
-int USART_putchar(char c, FILE *stream);
-int USART_stdout_redirect();
-char USART_getchar();
+uint8_t USART_init(uint32_t baudrate, uint8_t rx_enable, uint8_t tx_enable, uint8_t rx_int_enable, uint8_t tx_int_enable);
+uint8_t USART_putchar(uint8_t c, FILE *stream);
+uint8_t USART_stdout_redirect();
+uint8_t USART_getchar();
 
 
 #endif //MKLIB_USART_H
