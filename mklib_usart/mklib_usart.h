@@ -14,6 +14,14 @@
 #include <avr/io.h>
 #include <stdio.h>
 
+#define RX_ENABLE 1
+#define RX_DISABLE 0
+#define TX_ENABLE 1
+#define TX_DISABLE 0
+#define RX_INT_ENABLE 1
+#define RX_INT_DISABLE 0
+#define TX_INT_ENABLE 1
+#define TX_INT_DISABLE 0
 
 uint8_t USART_init(uint32_t baudrate, uint8_t rx_enable, uint8_t tx_enable, uint8_t rx_int_enable, uint8_t tx_int_enable);
 uint8_t USART_putchar(uint8_t c, FILE *stream);
